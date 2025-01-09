@@ -1,4 +1,0 @@
-dist/*
-jest.*
-node_modules/**
-src/generated/*
