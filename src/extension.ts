@@ -1,12 +1,21 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as cp from 'child_process';
+
+let serverProcess: cp.ChildProcess;
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand('contoso.openChat', () => {
-    const panel = vscode.window.createWebviewPanel('chatbot', 'AI Chatbot', vscode.ViewColumn.One, {
+  // Add new services in the future
+  const serverPath = vscode.Uri.joinPath(context.extensionUri, 'dist', 'contoso-service.js').path;
+  serverProcess = cp.spawn('node', [serverPath], {
+    detached: true,
+    stdio: 'inherit',
+  });
+  serverProcess.unref();
+
+  let disposable = vscode.commands.registerCommand('contoso.open', () => {
+    const panel = vscode.window.createWebviewPanel('chatbot', 'VSCode AI Chatbot eco-system', vscode.ViewColumn.One, {
       enableScripts: true,
     });
 
@@ -31,17 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 }
 
-// async function processFileContent(content: string): Promise<string> {
-//   const response = await fetch("https://chat.whyellow.app/conversation", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ content }),
-//   });
-//   const data = await response.json();
-//   return data.convertedContent; // Adjust according to your API response structure
-// }
-
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+  if (serverProcess) {
+    serverProcess.kill();
+  }
+}

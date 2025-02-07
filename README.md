@@ -11,3 +11,6 @@ A handy window where you can chat with your Contoso AI
 ```sh
 vsce package
 ```
+
+## Debug
+By pressing F5 and check the Ouput Panel
