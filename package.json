@@ -18,8 +18,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "contoso.openChat",
-        "title": "Opens a chat window to chat with contoso AI"
+        "command": "contoso.open",
+        "title": "Chat with Contoso"
       }
     ]
   },

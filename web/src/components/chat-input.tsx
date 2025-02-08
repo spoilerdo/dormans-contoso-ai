@@ -1,7 +1,7 @@
 import { JSX, useState } from 'react';
 import uuid from 'react-uuid';
-import ConversationDTO from '../types/conversation-dto';
-import Roles from '../enums/roles';
+import ConversationDTO from '../contoso/types/conversation-dto';
+import Roles from '../contoso/enums/roles';
 
 type Props = {
   setMessages: React.Dispatch<React.SetStateAction<ConversationDTO[]>>;
@@ -90,9 +90,9 @@ const ChatInput = ({ setMessages, messages }: Props): JSX.Element => {
 
   return (
     <div className="border-t border-gray-700 p-4">
-      <div className="flex flex-col items-stretch">
+      <div className="flex flex-col items-stretch border-gray-600">
         <textarea
-          className="flex-grow p-2 border border-gray-600 rounded-l-md focus:outline-none focus:ring focus:border-blue-300 bg-gray-700 text-white"
+          className="flex-grow p-2 bg-gray-700 focus-visible:none text-white"
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -100,12 +100,12 @@ const ChatInput = ({ setMessages, messages }: Props): JSX.Element => {
             if (e.key === 'Enter') handleSend();
           }}
         />
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-end border-t border-gray-600 bg-gray-700">
           <button
             onClick={handleSend}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring flex justify-center items-center"
+            className=" focus-visible:none p-2 text-white px-4 py-2 bg-gray-700 flex justify-center items-center hover:bg-gray-600"
           >
-            <span className="material-symbols-outlined">send</span>
+            <span className="text-2 material-symbols-outlined">send</span>
           </button>
         </div>
       </div>

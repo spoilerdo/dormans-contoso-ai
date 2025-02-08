@@ -1,6 +1,6 @@
 import { JSX } from 'react';
-import ConversationDTO from '../types/conversation-dto';
-import Roles from '../enums/roles';
+import ConversationDTO from '../contoso/types/conversation-dto';
+import Roles from '../contoso/enums/roles';
 
 type Props = {
   message: ConversationDTO;

@@ -1,9 +1,9 @@
 import { JSX, useState } from 'react';
 import ChatInput from './components/chat-input';
 import ChatMessage from './components/chat-message';
-import ConversationDTO from './types/conversation-dto';
+import ConversationDTO from './contoso/types/conversation-dto';
 import uuid from 'react-uuid';
-import Roles from './enums/roles';
+import Roles from './contoso/enums/roles';
 
 const App = (): JSX.Element => {
   const [messages, setMessages] = useState<ConversationDTO[]>([
