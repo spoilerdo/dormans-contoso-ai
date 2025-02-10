@@ -7,7 +7,7 @@ let serverProcess: cp.ChildProcess;
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
   // Add new services in the future
-  const serverPath = vscode.Uri.joinPath(context.extensionUri, 'dist', 'contoso-service.js').path;
+  const serverPath = vscode.Uri.joinPath(context.extensionUri, 'dist', 'contoso-service.js').fsPath;
   serverProcess = cp.spawn('node', [serverPath], {
     detached: true,
     stdio: 'inherit',
@@ -19,14 +19,14 @@ export function activate(context: vscode.ExtensionContext) {
       enableScripts: true,
     });
 
-    // let cssSrc = panel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, 'web', 'dist', 'index.css'));
+    let cssSrc = panel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, 'web', 'dist', 'index.css'));
     let scriptSrc = panel.webview.asWebviewUri(vscode.Uri.joinPath(context.extensionUri, 'web', 'dist', 'index.js'));
 
-    // <link rel="stylesheet" href="${cssSrc}" />
     panel.webview.html = `
-      <!DOCTYPE html>
-        <html lang="en">
+          <!DOCTYPE html>
+          <html lang="en">
           <head>
+            <link rel="stylesheet" href="${cssSrc}" />
           </head>
           <body>
             <noscript>You need to enable JavaScript to run this app.</noscript>

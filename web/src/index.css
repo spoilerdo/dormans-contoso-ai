@@ -3,10 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.material-symbols-outlined {
-    font-size: 15px;
-}
-
 :focus-visible {
     outline: none;
   }
