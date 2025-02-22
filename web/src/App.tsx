@@ -2,19 +2,10 @@ import { JSX, useState } from 'react';
 import ChatInput from './components/chat-input';
 import ChatMessage from './components/chat-message';
 import ConversationDTO from './contoso/types/conversation-dto';
-import uuid from 'react-uuid';
-import Roles from './contoso/enums/roles';
 import { ContosoProvider } from './contoso/contoso-provider';
 
 const App = (): JSX.Element => {
-  const [messages, setMessages] = useState<ConversationDTO[]>([
-    {
-      id: uuid(),
-      date: new Date().toISOString(),
-      content: '',
-      role: Roles.User,
-    },
-  ]);
+  const [messages, setMessages] = useState<ConversationDTO[]>([]);
 
   return (
     <div className="flex flex-col w-full h-full bg-gray-800 shadow-lg rounded-lg overflow-hidden">
