@@ -1,21 +1,23 @@
+import { useState } from 'react';
 import uuid from 'react-uuid';
+
 import Roles from '../enums/roles';
 import ConversationDTO from '../types/conversation-dto';
-import { useContosoProviderContext } from '../contoso-provider';
 import ChatResponseDTO from '../types/chat-response-dto';
 
-type Messages = {
+export type Messages = {
+  isProcessing: boolean;
+  messages: ConversationDTO[];
   handleSend: (input: string) => Promise<void>;
 };
 
 type Props = {
-  setMessages: React.Dispatch<React.SetStateAction<ConversationDTO[]>>;
-  messages: ConversationDTO[];
+  cookie: string;
 };
 
-const useMessages = ({ messages, setMessages }: Props): Messages => {
-  const { cookie } = useContosoProviderContext();
-  // const [isProcessing, setIsProcessing] = useState(false);
+const useMessages = ({ cookie }: Props): Messages => {
+  const [messages, setMessages] = useState<ConversationDTO[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const buildDto = (newInput: string): ConversationDTO[] => {
     return [
@@ -84,11 +86,14 @@ const useMessages = ({ messages, setMessages }: Props): Messages => {
   };
 
   return {
+    isProcessing,
+    messages,
     handleSend: async (input: string) => {
       if (input === null || typeof input !== 'string') return;
       const conversation = buildDto(input.trim());
       addNewMessage(conversation[conversation.length - 1]);
 
+      setIsProcessing(true);
       const response = await fetch('http://localhost:5000/proxy', {
         method: 'POST',
         headers: {
@@ -112,7 +117,9 @@ const useMessages = ({ messages, setMessages }: Props): Messages => {
           const formattedText = text.replace(/\\"/g, '"').replace(/\\\\/g, '\\').split('\\n');
           processOutput(formattedText);
         }
+        setIsProcessing(false);
       } else {
+        setIsProcessing(false);
         console.log(response);
       }
     },

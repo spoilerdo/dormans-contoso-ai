@@ -1,17 +1,15 @@
 import { JSX, useState } from 'react';
-import ConversationDTO from '../contoso/types/conversation-dto';
-import useMessages from '../contoso/hooks/messages';
 import Send from './icons/send';
+import { useContosoProviderContext } from '../contoso/contoso-provider';
 
-type Props = {
-  setMessages: React.Dispatch<React.SetStateAction<ConversationDTO[]>>;
-  messages: ConversationDTO[];
-};
-
-const ChatInput = (props: Props): JSX.Element => {
+const ChatInput = (): JSX.Element => {
   const [input, setInput] = useState('');
+  const { handleSend } = useContosoProviderContext();
 
-  const { handleSend } = useMessages(props);
+  const sendInput = (): void => {
+    handleSend(input);
+    setInput('');
+  };
 
   return (
     <div className="border-t border-gray-700 p-4">
@@ -22,12 +20,15 @@ const ChatInput = (props: Props): JSX.Element => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') handleSend(input);
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              sendInput();
+            }
           }}
         />
         <div className="flex flex-col items-end border-t border-gray-600 bg-gray-700">
           <button
-            onClick={() => handleSend(input)}
+            onClick={sendInput}
             className=" focus-visible:none p-2 text-white px-4 py-2 bg-gray-700 flex justify-center items-center hover:bg-gray-600"
           >
             <span className="text-2">

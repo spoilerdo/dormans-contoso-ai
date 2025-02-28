@@ -1,16 +1,16 @@
-# Dormans Contoso AI
+# Vscode Contoso Extension 🚀
 
-A handy extension to have your Azure Contoso AI close to you while coding.
+A handy extension to have your Contoso AI close to you while coding.
 
-## Features
+## Features 🔥
 
-### Chat with your AI
-A handy window where you can chat with your Contoso AI
+### Chat close at hand
+A handy window where you can chat with your Contoso.
+Simply fill in your cookie and start chatting.
 
-### Creating package
-```sh
-vsce package
-```
+## Upcoming Features 🙀
+- Being able to add files as context of your chat.
 
-## Debug
-By pressing F5 and check the Ouput Panel
+## Architecture 🧱
+It is setup up that the UI is completely loose from the Contoso engine.
+This will make sure that it is possible to connect other AI's as well in the future.

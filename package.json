@@ -1,13 +1,28 @@
 {
   "name": "dormans-contoso-ai",
-  "displayName": "contoso-ai",
-  "description": "A handy extension to use contoso AI inside vscode",
+  "displayName": "dormans-contoso-ai",
   "version": "0.0.1",
+  "description": "A handy extension to use contoso AI inside vscode",
+  "author": {
+    "name": "Martijn Dormans",
+    "url": "https://github.com/spoilerdo"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "icon": "assets/logo.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
-    "Other"
+    "AI"
+  ],
+  "keywords": [
+    "ai",
+    "pair programmer",
+    "chat"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",

@@ -4,5 +4,5 @@
 @tailwind utilities;
 
 :focus-visible {
-    outline: none;
-  }
+  outline: none;
+}
