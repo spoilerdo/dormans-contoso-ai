@@ -15,8 +15,6 @@ app.post('/proxy', async (req, res) => {
     try {
         const cookie = `${req.body.cookie}`;
         delete req.body.cookie;
-        console.log(req);
-        console.log(cookie);
 
         const response = await axios.post('https://chat.beyonder.tools/conversation', req.body, {
             headers: {

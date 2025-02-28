@@ -47,11 +47,10 @@ const useMessages = ({ cookie }: Props): Messages => {
     });
   };
 
-  const filterOutFaultyObjects = (obj: string): boolean => obj !== '' && obj !== '{}' && obj.length > 4;
+  const filterOutFaultyObjects = (obj: string): boolean => obj !== '' && obj !== '{}';
 
   const getMessageData = (obj: string): string | null => {
     const chatResponse = JSON.parse(obj) as ChatResponseDTO;
-    console.log(chatResponse);
     if (chatResponse.choices) {
       return chatResponse.choices.flatMap((x) => x.messages.map((x) => x.content)).join(' ');
     } else {
@@ -70,7 +69,6 @@ const useMessages = ({ cookie }: Props): Messages => {
       try {
         if (filterOutFaultyObjects(obj)) {
           const text = JSON.parse(JSON.stringify(obj));
-          console.log(text);
           const messageData = getMessageData(text);
           if (messageData) updateLatestMessage(messageData);
         }
@@ -120,7 +118,6 @@ const useMessages = ({ cookie }: Props): Messages => {
         setIsProcessing(false);
       } else {
         setIsProcessing(false);
-        console.log(response);
       }
     },
   };
